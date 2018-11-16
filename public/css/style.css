@@ -1,0 +1,393 @@
+*{
+	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	
+}
+body {
+	
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+
+}
+main {
+min-height: 100vh; /* will cover the 100% of viewport */
+
+position: relative;
+}
+/******************************home ***********************************/
+.home {
+  background-color: #fef1ff;
+}
+.home .logo{
+  margin-top:2%;
+}
+.home .logo img {
+
+  width:150px;
+  height: 150px;
+  float: left;
+}
+.home .logo-name  {
+  margin-top:2%;
+  float: right;
+  
+}
+.home .logo-name h5 {
+  display: block;
+  font-size: 21px;
+  padding-left: 32px;
+}
+.home .logo-name h4 {
+  color:#f00;
+  font-size:25px;
+ 
+}
+/*****************************************************************************/
+
+/****************************sanxar ********************************/
+.sanxar {
+    
+    background-color:#dddaa6;
+}
+.sanxar h4 {
+    
+    color:#af0000;
+}
+.card-header  {
+    background-color: #ca0606d4;
+    color:#fff !important;
+    }
+.sanxar table {
+    text-align: right;
+
+}
+
+
+.reading {
+    
+    margin-top: 30px;
+}
+.reading ul li {
+    
+    list-style-type: none;
+    text-align: right;
+    direction: rtl;
+    color:#af0000;
+    font-weight: bold;
+}
+ .sanxar table td {
+        font-weight: bold;
+        
+    }
+
+ .sanxar table td:nth-of-type(1),td:nth-of-type(3) {
+        font-weight: bold;
+         color:#af0000;
+    }
+/*********************************************************************************/
+
+/******************lastnews********************************************/
+
+.lastnews h5 {
+    
+    text-align: right;
+    margin: 20px 0;
+}
+
+.lastnews ul li {
+    
+    list-style: none;
+    text-align: right;
+}
+
+.lastnews  ul li a {
+    color: #b90000;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.lastnews  ul li a:hover {
+    color:#fff ;
+    text-decoration: none;
+    
+}
+
+/********************************************************************/
+
+.about-us {
+    background-color: azure;
+    padding:0 0 5px 0;
+}
+.about-us p {
+   text-align: right;
+   padding-bottom: 5px;    
+    padding-right: 2px;
+}
+/***************************************************/
+
+.how-us {
+    
+    background: azure;
+    
+}
+.how-us i {
+    
+    
+    margin: 30px 10px;
+    
+}
+/********************************************/
+
+.posts {
+    margin: 5px 0;
+}
+
+.posts article h5,p {
+     margin: 10px;
+    text-align: right;
+}
+.posts article img{
+    margin: 10px;
+    max-width: 100%;
+    height: auto;
+}
+.posts article {
+    
+    background-color: #fff;
+}
+.posts article i {
+    
+    font-size:20px;
+}
+
+
+hr {
+    border: 0;
+  clear:both;
+  display:block;
+  width: 96%;               
+  background-color:#F00;
+  height: 1px;
+}
+.cent {
+
+    background-color: #dddaa3;
+}
+/***********************************/
+.contact {
+
+    background-color: #f7f7f7;
+    padding: 5px;
+    margin: 20px;
+    min-height: 70vh;
+    
+}
+.contact form {
+    padding: 5px;
+    direction: rtl;
+    text-align: right;
+}
+.contact form textarea {
+
+    height: 200px;
+}
+.contact form button {
+
+    display: block;
+    margin: auto;
+    padding: 0 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************/
+footer {
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    background-color:#000;
+
+}
+footer p{
+    
+    text-align: center;
+}
+footer p span {
+    
+    color:#f00;
+}
+footer ul li a,span{
+    color:#c6c6c6;
+}
+footer ul li a:hover{
+    color:#f00;
+}
+
+@media screen and (max-width:414px){
+
+    .navbar-brand  {
+      font-size: 1.2em !important;
+     
+    }
+    .home .logo img {
+
+      width:78px;
+      height: 83px;
+      float: left;
+    }  
+.home .logo-name {
+  margin-top:10%;
+}
+.home .logo-name h4 {
+  color:#f00;
+  font-size :12px;
+ 
+}
+.home .logo-name h5 {
+  display: block;
+  font-size: 10px;
+  padding-left: 24px;
+}
+
+    .sanxar table {
+    text-align: right;
+    
+     
+}
+ .sanxar table td {
+        font-size: 9px;
+        
+    }
+    
+    .history h4 {
+        margin: 5px;
+        font-size: 14px;
+    }
+    
+
+.posts article h5{
+   font-size: 11px
+}
+.posts article p{
+    font-size: 12px
+}
+
+  .posts article i {
+    font-size: 13px;
+}
+    .nav-link {
+            padding: 9px;
+    }
+    .contact form textarea {
+
+        height: 165px;
+    }
+
+
+
+
+    footer p {
+        font-size: 15px;
+    }
+    
+}
+@media screen and (max-width:330px) {
+    
+    .nav-link {
+            padding: 5px;
+    }
+    footer p {
+         font-size: 13px;
+    }
+    .posts article i {
+    
+    font-size:10px;
+        }
+    .posts article h5{
+   font-size: 9px
+    }
+    .posts article p{
+        font-size: 11px
+    }
+
+}
+
+/**************************************************************************/
+
+
+@media screen and (min-width:416px ) and (max-width:480px){
+
+  .navbar-brand  {
+    font-size: 1.2em !important;
+   
+  }
+  .home .logo img {
+
+    width:78px;
+    height: 83px;
+    float: left;
+  }  
+.home .logo-name {
+margin-top:10%;
+}
+.home .logo-name h4 {
+font-size :12px;
+
+}
+.home .logo-name h5 {
+
+font-size: 10px;
+
+}
+    .sanxar table td {
+        font-size: 10px;
+        
+    }
+    .reading ul li {
+    font-size: 15px;    
+    list-style-type: none;
+    text-align: right;
+    direction: rtl;
+}
+    
+    
+    
+ footer ul li a{
+     padding: 5px;
+ }
+    
+}
+
+@media screen and (min-width:700px) and (max-width:800px) {
+    
+        .reading ul li {
+    font-size: 14px;    
+    list-style-type: none;
+    text-align: right;
+    direction: rtl;
+    display: block;
+}
+ 
+    .sanxar table td {
+        font-size: 10px;
+        
+    }
+}

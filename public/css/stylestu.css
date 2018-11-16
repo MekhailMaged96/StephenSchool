@@ -1,0 +1,36 @@
+.subject {
+    
+       min-height: 58vh;
+}
+.subject article {
+    margin: 5px 0;
+}
+.subject article h5 {
+     margin: 5px 0;
+    font-size: 18px;
+     padding: 0 8px;
+    display: inline-block;
+}
+.subject article span {
+    display: inline-block;
+    font-size: 15px;
+ 
+}
+.subject table {
+    margin: 10px 0;
+    border: 1px solid #ddd;
+}
+.myresult {
+    margin: 20px;
+    min-height: 60vh;
+}
+.myresult h3 {
+    background-color: #a70a0a;
+    color:#fff;
+    padding: 10px;
+    font-size:1.5em;
+}
+.myresult table {
+   text-align: right;
+   direction: rtl;
+}
