@@ -19,7 +19,7 @@
                                     <div><span class="badge badge-secondary">الرتبة</span><h5>wwww</h5></div>
                                     <div><span class="badge badge-secondary">غيابى</span><h5>15</h5></div>
                                 </div>
-                            <a href="{{route('studentresult')}}" class="btn btn-primary">درجاتى</a>
+                            <a href="{{route('studentresult')}}" class="btn btn-primary ">درجاتى</a>
                             </div>
                         </div>
                     </div>

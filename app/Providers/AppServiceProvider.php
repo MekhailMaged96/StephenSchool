@@ -17,24 +17,24 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Blade::if('isadmin',function (){
-            if(Auth::check()){
-                return Auth::user()->role==1 ?true :false;
+            if(Auth::guard('admin')->check()){
+                return true;
             }
             else {
                 return false;
             }
         });
         Blade::if('isstudent',function (){
-            if(Auth::check()){
-                return Auth::user()->role==0 ?true :false;
+            if(Auth::guard('web')->check()){
+                return true;
             }
             else {
                 return false;
             }
         });
         Blade::if('isteacher',function (){
-            if(Auth::check()){
-                return Auth::user()->role==2 ?true :false;
+            if(Auth::guard('teacher')->check()){
+                return true;
             }
             else {
                 return false;

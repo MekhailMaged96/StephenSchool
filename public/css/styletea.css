@@ -1,0 +1,62 @@
+.myclass {
+    margin: 5px 0;
+}
+hr{
+    width: 100%!important;
+}
+.myclass article h5 {
+     margin: 8px 0;
+    font-size: 18px;
+     padding: 0 8px;
+    display: inline-block;
+}
+.myclass article span {
+    display: inline-block;
+    font-size: 15px;
+ 
+}
+.myclass article a {
+    margin-top: 10px;
+ 
+}
+.myclass article  {
+   /* background-color: #ddd;*/
+    padding: 14px;
+}
+
+.studsheet table  {
+ direction: rtl;
+ text-align: right;
+ border:1px solid #ddd;
+}
+.teachersubjects {
+    margin: 20px 0;
+    min-height: 69vh;
+}
+
+
+
+
+@media screen and (max-width:330px) {
+    .myclass article  {
+        background-color: #ddd;
+        padding: 9px;
+    }
+    .myclass article h5 {
+        font-size:16px;
+    }
+    .studsheet table  {
+        direction: rtl;
+        text-align: right;
+        font-size: 9px;
+       }
+}
+@media screen and (max-width:480px){
+
+    .studsheet table  {
+        direction: rtl;
+        text-align: right;
+        font-size: 9px;
+       }
+}
+  

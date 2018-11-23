@@ -15,8 +15,7 @@
     </head>
     <body>   
     <main>
-     
-       @include('_partials.nav')
+         @include('_partials.nav')
       @yield('content')
     
     </main>
