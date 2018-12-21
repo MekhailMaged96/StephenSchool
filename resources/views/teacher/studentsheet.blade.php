@@ -4,9 +4,21 @@
 @endsection
 
 @section('content')
+    @include('_partials.withlogo')
     <section class="studsheet">
-
         <div class="container">
+        
+          <div class="head">
+              كشف اسماء بالاولاد لعام 2018 
+          </div>
+    
+          <div class="row">
+            <div class="studsheet-top ml-auto">
+              <a href="{{route('teacher.studentgrades')}}" class="btn btn-danger btn-md">الدرجات</a>
+              <p>عدد الاسابيع <span class="badge badge-secondary">5</span></p>
+              
+            </div>
+          </div>
           <div class="row">
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered">

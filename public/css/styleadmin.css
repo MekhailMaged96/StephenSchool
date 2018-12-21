@@ -1,0 +1,161 @@
+body {
+
+    background-color: #F1F1F1;
+}
+/************************ panel *************************************/
+.clear {
+    clear: both;
+}
+.panel .card-header{
+    color: #FFF;
+    background-color: #ff0000ad;
+}
+.card-body {
+    margin: 20px 0;
+    border-radius: 2px;
+    background-color: #fff;
+    transition:0.5s all;
+    border: 1px solid #F5F1F1;
+}
+
+.panel .card-body i,span,h5 {
+    color:#000;
+    display: inline-block;
+}
+.panel .card-body p {
+   text-align: center;
+    font-weight: 400;
+}
+.panel .card-body i {
+    margin-right:15px;
+}
+
+/********************************************************************/
+
+/************************* all user *********************************/
+.all-users  table {
+    direction: rtl;
+    text-align: right;
+    margin-top:5px;
+}
+.all-users  table td {
+    margin: 2px;
+
+}
+.all-users  table td select {
+    border: 1px solid #F1F1F1;
+    
+    padding: 5px;
+
+}
+.all-users .table-responsive {
+    direction: rtl;
+}
+/***********************************************************************************/
+
+/************************form-student-add***************************************/
+
+.add-student form {
+    direction: rtl;
+    text-align: right;
+    padding: 13px;
+    background-color: #ccc;
+    width: 98%;
+    margin-bottom:1.25em;
+
+}
+.add-student form label {
+    font-weight: bold;
+}
+
+.edit-student form {
+    direction: rtl;
+    text-align: right;
+    padding: 13px;
+    background-color: #ff8fb7;
+    width: 98%;
+    margin-bottom:1.25em;
+
+}
+.edit-student form label {
+    font-weight: bold;
+}
+
+/*********************************************************************/
+
+
+/*********************all-classes*********************/
+.all-classes table {
+
+    text-align: right;
+    direction: rtl;
+    margin-right: 2px;
+    width: 98%;
+}
+.all-classes td:nth-of-type(1)  a{
+   font-size: 1.2em;
+   color: #000;
+   text-decoration:none;
+  }
+  .all-classes td:nth-of-type(1)  a:hover{
+     color:#f00;
+     
+  }
+.all-classes td:last-child  a{
+  font-size: 1.5em;
+  margin-right: 8px;
+}
+.all-classes td:last-child  a:first-of-type{
+    color:#00f;
+  }
+.all-classes td:last-child  a:last-child{
+    color:#f00;
+}
+/***************************************************************/
+
+
+/***** class-create ****/
+.class-create form {
+
+    direction: rtl;
+    text-align: right;
+    padding: 13px;
+    background-color: #ccc;
+    width: 98%;
+    margin-bottom:1.25em;
+
+}
+.subject-index  table {
+        direction: rtl;
+        text-align: right;
+        margin-top:5px;
+}
+.form-check {
+
+    margin-right: 5px !important;
+}
+.form-check-label
+ {
+
+    margin-right: 25px !important;
+ }
+ .reading {
+    
+    margin-top: 30px;
+}
+.reading ul li {
+    
+    list-style-type: none;
+    text-align: right;
+    direction: rtl;
+    color:#af0000;
+    font-weight: bold;
+}
+/*******************************************************/
+
+@media (max-width:1024px) {
+    .all-users table td a{
+        margin-right: 0px !important;
+        margin-top: 3px !important;
+    }
+}

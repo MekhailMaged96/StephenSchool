@@ -1,0 +1,71 @@
+@extends('layouts.admin')
+@section('page-head')
+القطمارس والسنكسار
+@endsection
+@section('main-admin')
+<section class="all-readings">
+    <div class="row">
+        <a href="{{route('readings.create')}}" class="btn btn-success  ml-auto mr-3"><i class='fa fa-user-plus'></i>انشاء</a>
+    </div>     
+    <div class="row">
+            <a href="#" v-on:click="left"> <img src="{{asset('img/arrow-left.png')}}" width="30px" height="30px" class="img-responsive"></a>
+    <h2>test</h2>
+    <a href="#"  v-on:click="right" > <img src="{{asset('img/arrow-right.png')}}" width="30px" height="30px" class="img-responsive"></a>
+     
+    </div>
+  
+</section>
+@endsection
+
+
+@section('scripts')
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+var app = new Vue({
+   el:"#app",
+   data:{
+   counter:{!!$counter->id!!},
+   items:[],
+   },
+   mounted:function mounted(){
+     this.getstart();
+    },
+   methods:{
+   
+    getstart:function(){
+        var _this=this;
+        axios.get('/admin/teacher/'+this.counter).then(function (response) {
+        _this.items = response.data;
+     ;
+        });
+    },
+    left:function(){
+        this.counter++;
+        var _this = this;
+        axios.get('/admin/teacher/'+this.counter).then(function (response) {
+        _this.items = response.data;
+       
+        });
+    },
+    right:function(){
+        if(this.counter<0) {
+            this.counter=1;
+        }else if(this.counter>1) {
+            this.counter--;
+        }
+
+        var _this = this;
+ 
+        axios.get('/admin/teacher/'+this.counter).then(function (response) {
+        _this.items = response.data;
+           
+        });
+    }
+   },
+
+
+});
+
+
+</script>
+@endsection

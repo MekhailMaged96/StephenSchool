@@ -22,6 +22,10 @@ class TeacherController extends Controller
 
         return view('teacher.subjects');
     }
+    public function studentgrades() {
+
+        return view('teacher.studentgrades');
+    }
 
 
 }

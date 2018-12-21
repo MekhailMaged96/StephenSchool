@@ -24,13 +24,23 @@ Route::get('/myresult','PagesController@myresult')->middleware('auth:web')->name
 
 
 Route::prefix('admin')->group(function() {
- 
-    
-   
+    Route::get('/panel','admin\AdminController@panel')->name('admin.panel');
+    Route::resource('/student','admin\StudentController');
+    Route::resource('/subject','admin\SubjectController');
+    Route::resource('/class','admin\ClassController');
+    Route::resource('/teacher','admin\TeacherController');
+    Route::resource('/posts','admin\PostController');
+    Route::resource('/readings','admin\ReadingsController');
+    Route::resource('/posts','admin\PostController');
+    Route::resource('/gallery','admin\GalleryController');
+    Route::resource('/news/church','admin\ChurchNewsController',['names'=>'news.church']);
+    Route::resource('/news/school','admin\SchoolNewsController',['names'=>'news.school']);
 });
 Route::prefix('teacher')->group(function() {
  
     Route::get('/myclass','TeacherController@myclass')->name('teacher.myclass');
     Route::get('/studentsheet','TeacherController@studentsheet')->name('teacher.studentsheet');
-    Route::get('/subjects','TeacherController@subjects')->name('teacher.subjects');                                                                                                                    
+    Route::get('/subjects','TeacherController@subjects')->name('teacher.subjects'); 
+    Route::get('/studentgrades','TeacherController@studentgrades')->name('teacher.studentgrades'); 
+
 });

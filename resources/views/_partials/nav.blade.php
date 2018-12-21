@@ -42,7 +42,9 @@
                @isteacher
                 <a class="dropdown-item" href="{{route('teacher.myclass')}}">الفصل</a>
                @endisteacher
-            
+               @isadmin
+               <a class="dropdown-item" href="{{route('admin.panel')}}">لوحة التحكم</a>
+               @endisadmin
               
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="
