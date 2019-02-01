@@ -1,0 +1,41 @@
+   @foreach($team->users as $userr)  
+                        <tr>
+                         <th>{{$userr->id}}</th>
+                         <th>{{$userr->name}}</th>
+                     
+                         @foreach($team->subjects as $subject) 
+                         <th> 
+                            @foreach($subject->users as $user)
+                            @if($user->pivot->user_id==$userr->id)
+                                @if($user->pivot->grade)
+                                {{$user->pivot->grade}}
+                                @else 
+                           
+                                @endif
+                                @else 
+                                0
+                            @endif
+                        
+                            @endforeach
+                     
+                         </th>
+                         @endforeach
+
+                         @foreach($userr->subjects as $subject)
+                        <th>{{$subject->pivot->id}}</th>
+                        @endforeach
+                        </tr>
+                        @endforeach
+
+
+
+
+
+
+
+
+
+
+
+
+                   

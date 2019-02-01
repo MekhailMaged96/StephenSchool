@@ -5,7 +5,8 @@
 @section('main-admin')
 <section class="add-student">
     <div class="row">
-        <form action="" method="POST">
+        <form action="{{route('student.store')}}" method="POST">
+            @csrf
                 <div class="form-group">
                   <label for="formGroupExampleInput">الاسم</label>
                   <input type="text" class="form-control" id="formGroupExampleInput" placeholder="الاسم" name="name">
@@ -29,16 +30,14 @@
                 <div class="form-group col-md-2">
                         <label for="inputState">الفصل</label>
                         <select id="inputState" class="form-control" name="class">
-                          <option selected>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
+                          @foreach($teams as $team)  
+                          <option selected value="{{$team->id}}">{{$team->name}}</option>
+                         @endforeach
                         </select>
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput2">رقم الهاتف</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="رقم الهاتف">
+                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="رقم الهاتف" name="phone">
                 </div>
                
                 <button class="btn btn-success float-left">اضافة</button>

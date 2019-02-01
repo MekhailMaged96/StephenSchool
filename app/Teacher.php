@@ -22,4 +22,8 @@ class Teacher extends  Authenticatable
     {
         $this->notify(new TeacherResetPasswordNotification($token));
     }
+    public function teams(){
+
+        return $this->belongsToMany('App\Team','teachers_team','teacher_id','team_id');
+    }
 }

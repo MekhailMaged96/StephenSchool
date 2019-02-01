@@ -4,9 +4,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-
+use App\Post;
 use Illuminate\Http\Request;
-
+use Image;
+use Storage;
 class PostController extends Controller
 {
     /**
@@ -16,9 +17,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index');
+            $posts =Post::all();
+        return view('admin.posts.index')->with('posts',$posts);
     }
-
+  
     /**
      * Show the form for creating a new resource.
      *
@@ -37,7 +39,25 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,array(
+            'title' =>'required|max:199',
+            'body'  =>'required',
+            'img'=>'image',
+        ));
+        $post = new Post;
+        $post->title=$request->title;
+        $post->body =$request->body;
+        if($request->hasfile('img'))
+        {
+            $image = $request->file('img');
+            $filename= time().'.'.$image->getClientOriginalExtension();
+            $location = public_path('images/'.$filename);
+            Image::make($image)->resize(800,600)->save( $location);
+            $post->img= $filename;
+        }
+        $post->save();
+        session()->flash('success', 'Post Successfully Created!');
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -48,7 +68,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-   
+        $post = Post::find($id);
+
+        return view('admin.posts.show')->with('post',$post);
     }
 
     /**
@@ -59,7 +81,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.posts.edit');
+        $post = Post::find($id);
+        return view('admin.posts.edit')->with('post',$post);
     }
 
     /**
@@ -71,7 +94,32 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,array(
+            'title' =>'required|max:199',
+            'body'  =>'required',
+            'img'=>'image',
+        ));
+        $post = Post::find($id);
+        $post->title=$request->title;
+        $post->body =$request->body;
+        
+        if($request->hasfile('img'))
+        {
+            $image = $request->file('img');
+            $filename= time().'.'.$image->getClientOriginalExtension();
+            $location = public_path('images/'.$filename);
+            Image::make($image)->resize(800,400)->save( $location);
+            
+            $oldfile = $post->img;
+            //update the database 
+            $post->img= $filename;
+          
+            //delete the image
+            Storage::delete($oldfile);
+        }
+        $post->save();
+        session()->flash('success', 'Post Successfully Updated!');
+        return redirect()->route('posts.show',$post->id);
     }
 
     /**
@@ -82,6 +130,15 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        
+        $post = Post::find($id);
+        Storage::delete($post->img);
+        
+        $post->delete();
+       
+        return $post;
+       
+        
     }
 }

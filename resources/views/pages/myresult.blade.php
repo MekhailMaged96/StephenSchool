@@ -21,21 +21,21 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if($user->subjects->count()>0)
+                            @foreach($user->subjects as $subject)
                             <tr>
-                                <th scope="row">1</th>
-                                    <td>عربى</td>
-                                    <td>50</td>
+                                <th scope="row">{{ $subject->id}}</th>
+                                <td>{{ $subject->name}}</td>
+                                @if($subject->pivot->grade)
+                                <td>{{ $subject->pivot->grade}}</td>
+                                @else
+                                <td>لا يوجد درجة </td>
+                                @endif
                             </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>عربى</td>
-                                <td>50</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>عربى</td>
-                                <td>50</td>
-                            </tr>
+                           @endforeach
+                           @else 
+                           <p>لا يوجد درجات </p>
+                           @endif
                         </tbody>
                     </table> 
                 </div>

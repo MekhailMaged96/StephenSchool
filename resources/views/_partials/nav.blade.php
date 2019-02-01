@@ -9,14 +9,14 @@
       
         <ul class="navbar-nav ml-auto">
           <li class="nav-item ml-auto">
-            <a class="nav-link" href="/contact">{{trans('app.contact')}} <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/contact">{{trans('app.contact')}} <span class="sr-only">(current)</span><i class="fas fa-envelope ml-1"></i></a>
           </li>
        
 
           @if(!(Auth::guard('admin')->check()|| Auth::guard('teacher')->check()||Auth::guard('web')->check()) )
 
           <li class="nav-item ml-auto">
-          <a class="nav-link" href="/login">{{trans('app.Login')}}</a>
+          <a class="nav-link" href="/login">{{trans('app.Login')}}<i class="fas fa-user ml-1"></i></a>
           </li>
           @else
           
@@ -40,7 +40,7 @@
                @endisstudent
 
                @isteacher
-                <a class="dropdown-item" href="{{route('teacher.myclass')}}">الفصل</a>
+                <a class="dropdown-item" href="{{route('teacher.myclass')}}">الفصول</a>
                @endisteacher
                @isadmin
                <a class="dropdown-item" href="{{route('admin.panel')}}">لوحة التحكم</a>
@@ -66,10 +66,10 @@
           </li>
           @endif
           <li class="nav-item ml-auto">
-            <a class="nav-link" href="/gallary">{{trans('app.gallary')}}</a>
+            <a class="nav-link" href="/gallary">{{trans('app.gallary')}} <i class='fas fa-folder-open'></i></a>
           </li>
           <li class="nav-item active ml-auto">
-            <a class="nav-link" href="/">{{trans('app.home')}}</a>
+            <a class="nav-link" href="/">{{trans('app.home')}}  <i class='fas fa-home'></i></a>
           </li>
         </ul>
       </div>

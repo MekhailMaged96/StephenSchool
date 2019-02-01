@@ -7,12 +7,12 @@
     
 
 @include('_partials.withlogo')
-<section class="teachersubjects">
+<section class="teacher subjects">
 <div class="container">
-        <div class="row">
+        <div class="row  text-right">
             <div class="col-sm-8 offset-sm-2 col-12">
-                <div class="card">
-                    <div class="card-header text-right font-weight-bold">
+                <div class="card mt-3 mb-5">
+                    <div class="card-header font-weight-bold">
                            مواد الفصل
                     </div>    
                     <div class="card-body">
@@ -25,18 +25,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach($team->subjects as $subject)
                       <tr>
-                          <td>logic</td>
-                          <td><a href="https://www.youtube.com/watch?v=qHnZbHzNthw">https://www.youtube.com/watch?v=qHnZbHzNthw</a></td>
+                          <td>{{$subject->name}}</td>
+                          <td><a  class="active-link"href="{{$subject->content}}">{{$subject->content}}</a></td>
                       </tr>
-                      <tr>
-                          <td>logic</td>
-                          <td><a href="https://www.youtube.com/watch?v=qHnZbHzNthw">https://www.youtube.com/watch?v=qHnZbHzNthw</a></td>
-                      </tr>
-                      <tr>
-                          <td>logic</td>
-                          <td><a  class="active-link"href="https://www.youtube.com/watch?v=qHnZbHzNthw">https://www.youtube.com/watch?v=qHnZbHzNthw</a></td>
-                      </tr>
+                    @endforeach
                     </tbody>
                 </table>
                           

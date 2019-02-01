@@ -13,6 +13,7 @@
 </head>
 <body>
 @include('_partials.nav')
+@include('_partials.message')
 <div class="container-fluid " id="app">
     <div class="row d-flex d-md-block flex-nowrap wrapper">
         <div class="col-md-2 float-right col-1 pl-0 pr-0 collapse width " id="sidebar">
@@ -29,7 +30,12 @@
                         <a href="{{route('news.church.index')}}" class="list-group-item" data-parent="#menu1">اخبار الكنيسة<i class="fas fa-church"></i></a>
                 </div>
                 
-                <a href="#" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" ><span class="d-none d-md-inline">الكاميرا</span> <i class="fa fa-camera"></i> </a>
+                <a href="#menu5" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false" ><span class="d-none d-md-inline">الكاميرا</span> <i class="fa fa-camera"></i> </a>
+                <div class="collapse" id="menu5">
+                    <a href="{{route('album.index')}}" class="list-group-item" data-parent="#menu1">البوم<i class="fas fa-image"></i></a>
+                    
+            </div>
+                
                 <a href="#menu2" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="d-none d-md-inline">الطلاب</span> <i class="fas fa-user-graduate"></i> </a>
                 <div class="collapse" id="menu2"> 
 	

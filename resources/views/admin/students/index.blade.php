@@ -25,41 +25,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($users as $user)
                     <tr>
-                        <th scope="row">1</th>
-                        <td>ميخائيل ماجد بولس</td>
-                        <td>mekha@yahoo.com</td>
-                        <td>الابصالتس</td>
-                        <td>ميخا ميمخا ميخا ميخا</td>
-                        <td>01201111111</td>
-                        <td> <select>        
-                                <option value="volvo">1</option>
-                                <option value="saab">2</option>
-                                <option value="mercedes">3</option>
-                                <option value="audi">4</option>
-                        </select>
-                        </td>
-                        <td><a href="{{route('student.edit',1)}}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit"></i></a>
-                        <a href="#" class="btn btn-danger btn-sm mr-1"><i class="fas fa-user-minus"></i></a></td>
+                        <th scope="row">{{$user->id}}</th>
+                        <td>{{$user->name}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>{{$user->rank}}</td>
+                        <td>{{$user->address}}</td>
+                        <td>{{$user->phone}}</td>
+                 
+                        <td>{{$user->team->name}}</td>
+                        <td><a href="{{route('student.edit',$user->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit"></i></a>
+                        <button  class="btn btn-danger btn-sm mr-1"  data-toggle="modal" data-target="#exampleModal"  @click="getStu({{$user->id}})"><i class="fas fa-user-minus"></i></button></td>
                     </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>wwwwwwwwwwwwwwwwww</td>
-                        <td>10</td>
-                        <td>الابصالتس</td>
-                        <td>wwwwwwwwwwwwwwwwwww</td>
-                        <td>0120111111</td>
-                        <td>
-                        <select>        
-                                <option value="volvo">1</option>
-                                <option value="saab">2</option>
-                                <option value="mercedes">3</option>
-                                <option value="audi">4</option>
-                        </select>
-                        </td>
-                        <td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-user-edit"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm mr-1"><i class="fas fa-user-minus"></i></a></td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
            </div>
@@ -68,4 +47,53 @@
    
     </div>
 </section>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog text-right" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+            
+    
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            هل انت متاكد انك تريد حذف هذا الطالب
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" @click="deleteStu()">حذف</button>
+            </div>
+            </div>
+        </div>
+    </div>
+ @endsection
+@section('scripts')
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        var app = new Vue({
+                el:"#app",
+                data:{
+                    Id:"",
+            
+                },
+                methods:{
+                    getStu:function getStu(studentId){
+                       this.id=studentId;
+                    },
+                    deleteStu:function deleteStu() {
+                    var _this = this;
+             
+                    axios.delete('/admin/student/'+this.id).then(function (response) {
+                        location.reload(); 
+                    });
+                    
+                    },
+                },
+        });
+    
+    </script> 
 @endsection
+    

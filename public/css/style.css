@@ -202,7 +202,9 @@ hr {
     padding: 0 20px;
 }
 
-
+.album{
+    min-height: 80vh;
+}
 
 
 

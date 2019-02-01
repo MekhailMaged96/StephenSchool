@@ -111,31 +111,23 @@
                                     </div>
                                 </div>
                             </div>
+                            @foreach($posts as $post)
                             <article>
                                 <div class="row">
                                     <div class="col-6 col-sm-6">
-                                        <img src="{{asset('img/post.jpg')}}">                                  
+                                        <img src="{{asset('images/'.$post->img)}}">                                  
                                     </div> 
                                     <div class="col-6  col-sm-6">
-                                        <h5>تاريخ : 08 مايو 2018  <i class="fa fa-calendar"></i></h5>
-                                        
-                                        <p>شعار_٢٠١٨_٢٠١٩
-                                        جمال_بيتك
-                                    مدرسة_الشمامسة </p>
+                                        <!---<h5>تاريخ : 08 مايو 2018  <i class="fa fa-calendar"></i></h5>
+                                        -->
+                                        <h5>{{date ( 'M j,Y h:i a',strtotime($post->updated_at) )}} <i class="fa fa-calendar"></i></h5>
+                                    
+                                        <p>{{$post->title}} </p>
+                                        <p class="mt-3">{{$post->body}} </p>
                                     </div>
                             <hr>
-                                <div class="col-6 col-sm-6">
-                                        <img src="{{asset('img/post.jpg')}}">                                  
-                                    </div> 
-                                    <div class="col-6  col-sm-6">
-                                        <h5>تاريخ : 08 مايو 2018  <i class="fa fa-calendar"></i></h5>
-                                        
-                                        <p>شعار_٢٠١٨_٢٠١٩
-                                        جمال_بيتك
-                                    مدرسة_الشمامسة </p>
-                                    </div>
-                                </div>
-                            </article>  
+                            </article>
+                            @endforeach  
                         </section>
                     </section>
                  </div>

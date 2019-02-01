@@ -13,17 +13,21 @@
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">الاسم</th>
+                <th scope="col">المحتوى </th>
                 <th scope="col">الاعدادت</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach($subjects as $subject)
                 <tr>
-                <th scope="row">1</th>
-                <th scope="row">قبطى</th>
-                <td><a href="{{route('subject.edit',1)}}"><i class='fas fa-edit'></i></a>
+                <th scope="row">{{$subject->id}}</th>
+                <th scope="row">{{$subject->name}}</th>
+                <td scope="row"><a href="{{$subject->content}}" style="color:blue;">{{$subject->content}}</a></td>
+                <td><a href="{{route('subject.edit',$subject->id)}}"><i class='fas fa-edit'></i></a>
                     <a href="#"><i class='fas fa-trash-alt'></i></a></td>
                 
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>    

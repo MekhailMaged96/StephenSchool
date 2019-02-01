@@ -15,10 +15,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="card-text text-right" dir="rtl">
-                                    <div><span class="badge badge-secondary">الاسم</span><h5>ميخائيل ماجد بولس</h5></div>
-                                    <div><span class="badge badge-secondary">الرتبة</span><h5>wwww</h5></div>
-                                    <div><span class="badge badge-secondary">غيابى</span><h5>15</h5></div>
-                                    <div><span class="badge badge-secondary">الفصل</span><h5>الملاك ميخائيل</h5></div>
+                                    <div><span class="badge badge-secondary">الاسم</span><h5>{{$user->name}}</h5></div>
+                                    <div><span class="badge badge-secondary">الرتبة</span><h5>{{$user->rank}}</h5></div>
+                                    <div><span class="badge badge-secondary">غيابى</span><h5>{{$user->attendance}}</h5></div>
+                                    <div><span class="badge badge-secondary">الفصل</span><h5>{{$user->team->name}}</h5></div>
+                                    <div><span class="badge badge-secondary mt-1">الميعاد</span><h5>{{$user->team->date}}</h5></div>
                                 </div>
                             <a href="{{route('studentresult')}}" class="btn btn-primary ">درجاتى</a>
                             </div>
@@ -38,18 +39,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach($user->team->subjects as $subject)
                           <tr>
-                              <td>logic</td>
-                              <td>https://www.youtube.com/watch?v=qHnZbHzNthw</td>
+                              <td>{{$subject->name}}</td>
+                              <td><a href="{{$subject->content}}">{{$subject->content}}</a></td>
                           </tr>
-                          <tr>
-                              <td>logic</td>
-                              <td>https://www.youtube.com/watch?v=qHnZbHzNthw</td>
-                          </tr>
-                          <tr>
-                              <td>logic</td>
-                              <td>https://www.youtube.com/watch?v=qHnZbHzNthw</td>
-                          </tr>
+                          @endforeach
                         </tbody>
                     </table>
                 </div>

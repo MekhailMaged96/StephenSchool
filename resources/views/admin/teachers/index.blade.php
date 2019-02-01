@@ -23,42 +23,79 @@
                     </tr>
                 </thead>
                 <tbody>
+                  @foreach($teachers as $teacher)  
                     <tr>
-                        <th scope="row">1</th>
-                        <td>يونان</td>
-                        <td>mekha@yahoo.com</td>
-                        <td>01201111111</td>
-                        <td> <select>        
-                                <option value="volvo">1</option>
-                                <option value="saab">2</option>
-                                <option value="mercedes">3</option>
-                                <option value="audi">4</option>
-                        </select>
+                        <th scope="row">{{ $teacher->id}}</th>
+                        <td>{{ $teacher->name}}</td>
+                        <td>{{ $teacher->email}}</td>
+                        <td>{{ $teacher->phone}}</td>
+                        <td>
+                        @foreach ($teacher->teams as $team)
+                        <ul style="display: inline-block;">
+                            <li> {{ $team->name}} </li>
+                        </ul>
+                        @endforeach
+                           
                         </td>
-                        <td><a href="{{route('teacher.edit',1)}}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit"></i></a>
-                        <a href="#" class="btn btn-danger btn-sm mr-1"><i class="fas fa-user-minus"></i></a></td>
+                        <td><a href="{{route('teacher.edit',$teacher->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit"></i></a>
+                        <button  class="btn btn-danger btn-sm mr-1"  data-toggle="modal" data-target="#exampleModal"  @click="getTea({{$teacher->id}})"><i class="fas fa-user-minus"></i></button></td>
                     </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>يونان</td>
-                        <td>mekha@yahoo.com</td>
-                        <td>01201111111</td>
-                        <td> <select>        
-                                <option value="volvo">1</option>
-                                <option value="saab">2</option>
-                                <option value="mercedes">3</option>
-                                <option value="audi">4</option>
-                        </select>
-                        </td>
-                        <td><a href="{{route('teacher.edit',1)}}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit"></i></a>
-                        <a href="#" class="btn btn-danger btn-sm mr-1"><i class="fas fa-user-minus"></i></a></td>
-                    </tr>
+                  @endforeach
+               
                 </tbody>
             </table>
            </div>
     </div>
-    
+
    
     </div>
 </section>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog text-right" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+        
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+        هل انت متاكد انك تريد حذف هذا الخادم
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" @click="deleteTea()">حذف</button>
+        </div>
+        </div>
+    </div>
+</div>
+@endsection
+@section('scripts')
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+            el:"#app",
+            data:{
+                Id:"",
+        
+            },
+            methods:{
+                getTea:function getTea(teacherId){
+                   this.id=teacherId;
+                },
+                deleteTea:function deleteTea() {
+                var _this = this;
+         
+                
+                axios.delete('/admin/teacher/'+this.id).then(function (response) {
+                    location.reload(); 
+                });
+                
+             
+                },
+            },
+    });
+
+</script> 
 @endsection

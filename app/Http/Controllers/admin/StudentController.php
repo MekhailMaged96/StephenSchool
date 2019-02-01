@@ -4,6 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User;
+use App\Team;
+use Hash;
 class StudentController extends Controller
 {
     /**
@@ -13,7 +16,10 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('admin.students.index');
+        $users= User::all();
+        $teams = Team::all();
+      
+        return view('admin.students.index')->with('users',$users)->with('teams',$teams);
     }
 
     /**
@@ -23,7 +29,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('admin.students.create');
+        $teams = Team::all();
+        return view('admin.students.create')->with('teams',$teams);
     }
 
     /**
@@ -34,7 +41,33 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,array(
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            
+            'rank' =>'string|max:255',
+            'address'=>'string',
+            'phone'=>'regex:/(01)[0-9]{9}/',
+
+        ));
+        $user = new User; 
+        $user->name=$request->name;
+        $user->email=$request->email;
+        if($user->password){
+            $user->password=Hash::make($request->password);
+        }else {
+
+            $user->password=Hash::make('123456');
+        }
+      
+        $user->rank=$request->rank;
+        $user->address=$request->address;
+        $user->phone=$request->phone;
+        $user->team_id=$request->class;
+
+        $user->save();
+        session()->flash('success', '! تم انشاء بيانات الطالب بنجاح ');
+        return redirect()->route('student.index');
     }
 
     /**
@@ -45,7 +78,8 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        return view('admin.students.show');
+        $user = User::find($id);
+        return view('admin.students.show')->with('user',$user);
     }
 
     /**
@@ -57,8 +91,9 @@ class StudentController extends Controller
     public function edit($id)
     {
         //
-        
-        return view('admin.students.edit');
+        $user = User::find($id);
+        $teams = Team::all();
+        return view('admin.students.edit')->with('user',$user)->with('teams',$teams);
     }
 
     /**
@@ -70,7 +105,40 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,array(
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,'.$id,
+           
+            'rank' =>'string|max:255',
+            'address'=>'string',
+            'phone'=>'regex:/(01)[0-9]{9}/',
+
+        ));
+        $user = User::find($id); 
+       
+      
+        
+
+        $user->name=$request->name;
+        $user->email=$request->email;
+
+    
+        if($user->password){
+            $user->password=Hash::make($request->password);
+        }else {
+
+            $user->password=$user->password;
+        }
+      
+        $user->rank=$request->rank;
+        $user->address=$request->address;
+        $user->phone=$request->phone;
+     
+        $user->team_id=$request->class;
+
+        $user->save();
+        session()->flash('success', '! تم  تعديل بيانات الطالب بنجاح ');
+        return redirect()->route('student.index');
     }
 
     /**
@@ -81,6 +149,9 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user =User::find($id);
+
+        $user->delete();
+        return "deleted";
     }
 }

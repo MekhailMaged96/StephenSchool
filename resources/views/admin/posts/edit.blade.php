@@ -5,23 +5,31 @@
 @section('main-admin')
 <section class="class-create">
     <div class="row ">
-       <form action="#" type="post">
+            {!! Form::open(array('route' => ['posts.update',$post->id],'files'=>true)) !!}
            @csrf
             <div class="form-group">
                 <label for="formGroupExampleInput">العنوان :</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="" name="name">
+                <input type="text" class="form-control" id="formGroupExampleInput" value="{{$post->title}}" name="title">
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">المحتوى :</label>
-                <textarea class="form-control" rows="5" id="comment"></textarea>
+                <textarea class="form-control" rows="5" name="body"> {{$post->body}}</textarea>
             </div>
             <div class="form-group">
-                <label> الصورة :</label>
+                <p> الصورة :</p>
+                @if($post->img)
+
+                <img src="{{asset('images/'.$post->img)}}">
+    
+                @else
+                <p style="text-align:right; ">لا يوجد صورة</p>
+              
+                @endif
                 <br>
-                {{ Form::file('image_uploaded')}}
+                {{ Form::file('img')}}
              </div>
-                
-            <button class="btn btn-primary float-left">انشاء</button>
+             <input type="hidden" name="_method" value="PUT">
+            <button class="btn btn-primary float-left">تعديل</button>
        </form>
     </div>
 @endsection

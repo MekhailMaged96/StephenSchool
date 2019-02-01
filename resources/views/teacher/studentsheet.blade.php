@@ -14,7 +14,7 @@
     
           <div class="row">
             <div class="studsheet-top ml-auto">
-              <a href="{{route('teacher.studentgrades')}}" class="btn btn-danger btn-md">الدرجات</a>
+              <a href="{{route('teacher.studentgrades',$team->id)}}" class="btn btn-danger btn-md">الدرجات</a>
               <p>عدد الاسابيع <span class="badge badge-secondary">5</span></p>
               
             </div>
@@ -33,22 +33,30 @@
                               </tr>
                             </thead>
                             <tbody>
+                              <!---
+                              @foreach($team->users as $user)
                               <tr>
-                                <th scope="row">1</th>
-                                <td>wwwwwwwwwwwwwwwwww</td>
-                                <td>10</td>
-                                <td>الابصالتس</td>
-                                <td>wwwwwwwwwwwwwwwwwww</td>
-                                <td>01201111111</td>
+                                <th scope="row">{{$user->id}}</th>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->attendance}}</td>
+                                <td>{{$user->rank}}</td>
+                                <td>{{$user->address}}</td>
+                                <td>{{$user->phone}}</td>
                               </tr>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>wwwwwwwwwwwwwwwwww</td>
-                                <td>10</td>
-                                <td>الابصالتس</td>
-                                <td>wwwwwwwwwwwwwwwwwww</td>
-                                <td>0120111111</td>
-                              </tr>
+                             @endforeach
+                             --->
+                             <tr v-for="item in attend">
+                                <th scope="row">@{{item.id}}</th>
+                                <td>@{{item.name}}</td>
+                              
+                                <td><input type="number" class="form-control " style="width:80%; display: inline-block;" v-model="attend.attendance=item.attendance" name="attend">
+                                    <button class="btn btn-sm btn-primary" style="display: inline-block;" @click="addattend(item.attendance,item.id)" ><i class="fas fa-plus"></i></button>
+                                </td>
+                                <td>@{{item.rank}}</td>
+                                <td>@{{item.address}}</td>
+                                <td>@{{item.phone}}</td>
+                            </tr>
+              
                             </tbody>
                           </table>
                     </div>
@@ -57,4 +65,39 @@
         </div>
     </section>
 
+@endsection
+@section('scripts')
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+            el:"#app",
+            data:{
+                attend:[],
+  
+        
+            },
+            mounted: function mounted() {
+            this.getAttend();
+            },
+            methods:{
+                addattend:function(item,userId){
+                var _this = this;
+             
+                axios.post('/teacher/addattend/' + userId,{attend:item}).then(function (response) {
+                    _this.getAttend();
+                    
+                });
+                },
+
+                getAttend: function getAttend() {
+                var _this = this;
+                
+                axios.get('/teacher/allattend/'+{{$team->id}}).then(function (response) {
+                    _this.attend = response.data;
+                });
+                }
+            },
+    });
+
+    </script> 
 @endsection

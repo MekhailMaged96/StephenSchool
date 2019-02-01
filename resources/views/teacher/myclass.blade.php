@@ -14,34 +14,21 @@
                         <div class="card-header text-right font-weight-bold">
                                 فصولى
                         </div>
+                        @foreach($teacher->teams as $team)
                         <div class="card-body">
                             <article>
                             <div class="card-text text-right" dir="rtl">
-                                    <div><span class="badge badge-primary">اسم الفصل</span><h5>الملاك ميخائيل</h5></div>
-                                    <div><span class="badge badge-primary">الميعاد</span><h5>wwww</h5></div>
-                                    <div><span class="badge badge-primary">google sheet</span><h5>wwww</h5></div>
+                                    <div><span class="badge badge-primary">اسم الفصل</span><h5>{{$team->name}}</h5></div>
+                                    <div><span class="badge badge-primary">الميعاد</span><h5>{{$team->date}}</h5></div>
+                                    <div><span class="badge badge-primary">google sheet</span><h5></h5></div>
                                   
                             </div>
-                            <a href="{{route('teacher.studentsheet')}}" class="btn btn-success">كشف الاولاد</a>
-                            <a href="{{route('teacher.subjects')}}" class="btn btn-danger">مواد الفصل</a>
+                            <a href="{{route('teacher.studentsheet',$team->id)}}" class="btn btn-success">كشف الاولاد</a>
+                            <a href="{{route('teacher.subjects',$team->id)}}" class="btn btn-danger">مواد الفصل</a>
                             </article>
                         </div>
                         <hr>
-                        <div class="card-body">
-                               
-                                <article>
-                                <div class="card-text text-right" dir="rtl">
-                                        <div><span class="badge badge-primary">اسم الفصل</span><h5>ميخائيل ماجد بولس</h5></div>
-                                        <div><span class="badge badge-primary">الميعاد</span><h5>wwww</h5></div>
-                                        <div><span class="badge badge-primary">google sheet</span><h5>wwww</h5></div>
-                                        
-                                      
-                                        
-                                </div>
-                                <a href="{{route('teacher.studentsheet')}}" class="btn btn-success">كشف الاولاد</a>
-    
-                                </article>
-                        </div>
+                     @endforeach
                         
                     </div>
                 </div>

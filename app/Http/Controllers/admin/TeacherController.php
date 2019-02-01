@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Teacher;
+use App\Team;
+use Hash;
 use DB;
 class TeacherController extends Controller
 {
@@ -15,8 +17,10 @@ class TeacherController extends Controller
      */
     public function index()
     {      
-        
-        return view('admin.teachers.index')->withCounter($counter);
+        $teachers= Teacher::all();
+    
+      
+        return view('admin.teachers.index')->with('teachers',$teachers);
     }
 
     /**
@@ -26,8 +30,8 @@ class TeacherController extends Controller
      */
     public function create()
     {
-      
-        return view('admin.teachers.create');
+       $teams =Team::all();
+        return view('admin.teachers.create')->with('teams',$teams);
     }
 
     /**
@@ -38,7 +42,36 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,array(
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            
+            'rank' =>'string|max:255',
+            'address'=>'string',
+            'phone'=>'regex:/(01)[0-9]{9}/',
+
+        ));
+        $teacher = new Teacher; 
+        $teacher->name=$request->name;
+        $teacher->email=$request->email;
+        if($teacher->password){
+            $teacher->password=Hash::make($request->password);
+        }else {
+
+            $teacher->password=Hash::make('123456');
+        }
+           
+        $teacher->phone=$request->phone;
+        $i=explode(',',$request->teams);
+        $teacher->save();
+        if($request->teams){
+            $teacher->teams()->sync($i,false);
+        }
+  
+
+        
+        session()->flash('success', '! تم انشاء بيانات الخادم بنجاح ');
+        return redirect()->route('teacher.index');
     }
 
     /**
@@ -64,7 +97,9 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.teachers.edit');
+        $teacher = Teacher::find($id);
+        $teams = Team::all();
+        return view('admin.teachers.edit')->with('teacher',$teacher)->with('teams',$teams);
     }
 
     /**
@@ -76,7 +111,38 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,array(
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'phone'=>'regex:/(01)[0-9]{9}/',
+
+        ));
+        $teacher = Teacher::find($id); 
+       
+      
+        
+
+        $teacher ->name=$request->name;
+        $teacher ->email=$request->email;
+
+    
+        if($teacher ->password){
+            $teacher ->password=Hash::make($request->password);
+        }else {
+
+            $teacher->password=$teacher->password;
+        }
+        $teacher ->phone=$request->phone;
+        
+        $i=explode(',',$request->teams);
+        $teacher ->save();
+
+        if($request->teams){
+            $teacher->teams()->sync($i);
+        }
+
+        session()->flash('success', '! تم  تعديل بيانات الخادم بنجاح ');
+        return redirect()->route('teacher.index');
     }
 
     /**
@@ -87,6 +153,9 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $teacher =Teacher::find($id);
+
+        $teacher->delete();
+        return  $id;
     }
 }

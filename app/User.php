@@ -27,4 +27,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token','role',
     ];
+    public function team(){
+
+        return $this->belongsTo('App\Team');
+    }
+    public function subjects(){
+
+        return $this->belongsToMany('App\Subject','subject_user','user_id','subject_id')->withPivot('grade');
+     }
 }
