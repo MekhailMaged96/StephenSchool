@@ -8,29 +8,41 @@ use App\Team;
 use App\User;
 use App\subject_user;
 use Illuminate\Support\Facades\Input;
+use App\ResultYears;
 class GradeController extends Controller
 {
 
+    public function __construct()
+    {
+
+        $this->middleware('auth:admin');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function allclasses()
     {
-       
+        $teams = Team::all();
+        return view('admin.grades.allclasses')->withTeams($teams);
     }
-
+    
+    public function index($teamid)
+    {
+        $team = Team::find($teamid);
+        return view('admin.grades.index')->withTeam($team);
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create($teamid)
     {
-        $team= Team::find($id);
-        
-        return view('admin.grades.create')->with('team',$team);
+        $team= Team::find($teamid);
+     
+        return view('admin.grades.create')->withTeam($team);
     }
 
     /**
@@ -41,8 +53,9 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate($request,array(
-            
+            'userId' =>'required',
            
        
         ));
@@ -51,7 +64,11 @@ class GradeController extends Controller
         $team =  Team::find($team_id);
         $user = User::find($user_id);
 
+        
+        if(count($user->subjects)==0){
         $user->subjects()->sync($team->subjects,false);
+        }
+
 
         $couresGrade=[];
         $id=0;
@@ -60,13 +77,11 @@ class GradeController extends Controller
         $course->pivot->grade=$request->couresGrade[$id++];
         $course->pivot->save();
        }
-
-       
         
-      
        
-       return redirect()->route('class.show',$team_id);
+      return redirect()->route('grade.index',$team_id);
        
+  
     }
 
     /**

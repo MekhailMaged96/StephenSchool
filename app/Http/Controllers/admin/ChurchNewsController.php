@@ -4,7 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\ChurchNews;
+use Image;
+use Storage;
 class ChurchNewsController extends Controller
 {
     /**
@@ -14,7 +16,8 @@ class ChurchNewsController extends Controller
      */
     public function index()
     {
-        return view('admin.churchnews.index');
+        $churchnews = ChurchNews::all();
+        return view('admin.churchnews.index')->with('churchnews',$churchnews);
     }
 
     /**
@@ -24,6 +27,7 @@ class ChurchNewsController extends Controller
      */
     public function create()
     {
+
         return view('admin.churchnews.create');
     }
 
@@ -35,7 +39,28 @@ class ChurchNewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,array(
+            'title' =>'required|max:199',
+            'body'  =>'required',
+            'img'=>'image',
+        ));
+        $new= new ChurchNews;
+
+        $new->title = $request->title;
+        $new->body = $request->body;
+        if($request->hasfile('img'))
+        {
+            $image = $request->file('img');
+            $filename= time().'.'.$image->getClientOriginalExtension();
+            $location = public_path('storage/news/church/'.$filename);
+            Image::make($image)->resize(800,400)->save( $location);
+            $new->img=$filename;
+        } 
+
+
+      $new->save();
+
+      return redirect()->route('news.church.index');   
     }
 
     /**
@@ -46,7 +71,8 @@ class ChurchNewsController extends Controller
      */
     public function show($id)
     {
-        return view('admin.churchnews.show');
+        $churchnews = ChurchNews::find($id);
+        return view('admin.churchnews.show')->with('churchnews',$churchnews);
     }
 
     /**
@@ -58,7 +84,8 @@ class ChurchNewsController extends Controller
     public function edit($id)
     {
         
-        return view('admin.churchnews.edit');
+        $churchnews = ChurchNews::find($id);
+        return view('admin.churchnews.edit')->with('churchnews',$churchnews);
     }
 
     /**
@@ -70,7 +97,39 @@ class ChurchNewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,array(
+            'title' =>'required|max:199',
+            'body'  =>'required',
+            'img'=>'image',
+        ));
+        $new = ChurchNews::find($id);
+        $new->title=$request->title;
+        $new->body =$request->body;
+        
+        if($request->hasfile('img'))
+        {
+            $image = $request->file('img');
+            $filename= time().'.'.$image->getClientOriginalExtension();
+            $location = public_path('storage/news/church/'.$filename);
+            Image::make($image)->resize(800,400)->save( $location);
+            // get the old file name 
+            $oldfile = $new->img;
+
+            //update the database 
+            $new->img= $filename;
+          
+         
+            if($oldfile){
+                unlink(public_path('storage/news/church/'.$oldfile));
+            }
+            //delete the image
+     
+            //Storage::delete(public_path('storage/news/school/'.$oldfile));
+        }
+        $new->save();
+        session()->flash('success', 'New Successfully Updated!');
+        return redirect()->route('news.church.show',$new->id);
+
     }
 
     /**
@@ -81,6 +140,16 @@ class ChurchNewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $new = ChurchNews::find($id);
+        if($new->img){
+
+            unlink(public_path('storage/news/church/'.$new->img));
+        }
+       
+        $new->delete();
+        
+        return "deleted";
+
+
     }
 }

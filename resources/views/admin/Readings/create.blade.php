@@ -5,10 +5,34 @@
 @section('main-admin')
 <section class="add-student">
         <div class="row">
-            <form action="" method="POST">
+            <form action="{{route('readings.store')}}" method="POST">
+                @csrf
                     <div class="form-group">
                             <label for="formGroupExampleInput">تاريخ القبطى</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="" name="">
+                            <br>
+                            <label>اليوم :</label>
+                            <select class="form-control col-md-1" style="display:inline" name="day">
+                                @for($i=1; $i<=30; $i++)
+                                <option>{{$i}}</option>
+                                @endfor
+                            </select>
+                            <label>الشهر:</label>
+                            <select class="form-control col-md-1" style="display:inline" name="month">
+                                <?php 
+                             $months=array('توت','امشير','بابة','هاتور','كيهك','برمهات','برمودة','طوبة','بشنس','بؤونة','نسىء','أبيب'); 
+                                    
+                                ?>
+                                @for($i=1; $i<count($months); $i++)
+                                <option value="{{$i}}">{{$months[$i]}}</option>
+                                @endfor
+                            </select>
+                            <label>العام:</label>
+                            <select class="form-control col-md-1" style="display:inline" name="year">
+                             
+                                    @for($i=1700; $i<=2000; $i++)
+                                    <option>{{$i}}</option>
+                                    @endfor
+                            </select>
                     </div>
                     <div class="form-group">
                       <label for="formGroupExampleInput">مزمور عشية</label>

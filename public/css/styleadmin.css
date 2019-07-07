@@ -6,6 +6,9 @@ body {
 .clear {
     clear: both;
 }
+img {
+max-width: 100%;
+}
 .panel .card-header{
     color: #FFF;
     background-color: #ff0000ad;
@@ -83,7 +86,15 @@ body {
 
 /*********************************************************************/
 
+/********news-show***********/
 
+.news-show img {
+    max-width: 100%;
+}
+
+.news-show p {
+    font-weight: bold;
+}
 /*********************all-classes*********************/
 .all-classes table {
 
@@ -153,6 +164,11 @@ body {
 }
 /*******************************************************/
 
+.link-grade:hover {
+  
+    color: #f00;
+    text-decoration: none;
+}
 @media (max-width:1024px) {
     .all-users table td a{
         margin-right: 0px !important;

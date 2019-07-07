@@ -11,13 +11,12 @@
                 <label for="formGroupExampleInput">الاسم</label>
                 <input type="text" class="form-control" id="formGroupExampleInput" placeholder="الاسم" name="name">
             </div>
+           
             <div class="form-group">
-                <label for="formGroupExampleInput">تفاصيل</label>
-                <textarea class="form-control" rows="5" id="comment" name="description"></textarea>
+                <div> <label for="formGroupExampleInput">صورة البوم</label></div>
+                {{ Form::file('cover_image')}}
             </div>
-          
-            {{ Form::file('cover_image')}}
-       
+
             <button class="btn btn-primary float-left">اضافة</button>
        </form>
     </div>

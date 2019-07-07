@@ -23,6 +23,7 @@
            
            
                     <label for="inputState">الفصول :</label>
+                        
                         @foreach($teams as $team)  
                         <div class="form-group">
                             <div class="form-check">

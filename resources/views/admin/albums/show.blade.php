@@ -8,7 +8,7 @@
         
         <a href="{{route('photo.create',$album->id)}}" class="btn btn-success  ml-auto mr-3"><i class='fas fa-plus'></i> اضافة صور</a>
     </div>
-    <div class="row">
+    <div class="row justify-content-end">
         @if(count($album->photos)>0)
         <?php
         $photocount=count($album->photos);
@@ -19,7 +19,7 @@
         <div class="col-md-3 mt-3"  class="justify-content-end d-flex">
             <article>
                 <img src="{{asset('storage/photos/'.$photo->album_id.'/'.$photo->photo)}}" alt="{{$photo->name}}" class="img-thumbnail img-responsive">
-                <div class="caption text-center mt-3"><button class="btn btn-danger btn-sm mr-4" @click.prevent="photoRemove({{$photo->id}})"><i class='fas fa-trash-alt'></i></button>   {{$photo->name}} </div>
+                <div class="caption text-center mt-3"><button class="btn btn-danger btn-sm mr-4" @click.prevent="photoRemove({{$photo->id}})"><i class='fas fa-trash-alt'></i></button></div>
                
             </article>
 
@@ -29,7 +29,7 @@
             
                 <article>
                     <img src="{{asset('storage/photos/'.$photo->album_id.'/'.$photo->photo)}}" alt="{{$photo->name}}" class="img-thumbnail img-responsive">
-                    <div class="caption text-center mt-3"><button class="btn btn-danger btn-sm mr-4" @click.prevent="photoRemove({{$photo->id}})"><i class='fas fa-trash-alt'></i></button>   {{$photo->name}} </div>
+                    <div class="caption text-center mt-3"><button class="btn btn-danger btn-sm mr-4" @click.prevent="photoRemove({{$photo->id}})"><i class='fas fa-trash-alt'></i></button></div>
                 </article>
     
         </div>

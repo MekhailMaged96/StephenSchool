@@ -30,12 +30,15 @@
                         <td>{{ $teacher->email}}</td>
                         <td>{{ $teacher->phone}}</td>
                         <td>
+                        @if(count($teacher->teams)>0)
                         @foreach ($teacher->teams as $team)
                         <ul style="display: inline-block;">
                             <li> {{ $team->name}} </li>
                         </ul>
                         @endforeach
-                           
+                        @else 
+                        <p>لا يوجد فصول</p>
+                        @endif
                         </td>
                         <td><a href="{{route('teacher.edit',$teacher->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit"></i></a>
                         <button  class="btn btn-danger btn-sm mr-1"  data-toggle="modal" data-target="#exampleModal"  @click="getTea({{$teacher->id}})"><i class="fas fa-user-minus"></i></button></td>

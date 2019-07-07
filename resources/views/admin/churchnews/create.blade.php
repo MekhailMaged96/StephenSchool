@@ -1,11 +1,12 @@
 @extends('layouts.admin')
 @section('page-head')
-انشاء اخبار الكنيسة
+انشاء اخبار المدرسة
 @endsection
 @section('styles')
 <style>
     .class-create form{
-        background-color: #e0e04e;
+        background-color: #ffa641;
+   
     }
 
 </style>
@@ -13,20 +14,20 @@
 @section('main-admin')
 <section class="class-create">
     <div class="row ">
-       <form action="#" type="post">
+       <form action="{{route('news.church.store')}}"  method="POST" enctype="multipart/form-data">
            @csrf
             <div class="form-group">
                 <label for="formGroupExampleInput">العنوان :</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="" name="name">
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="" name="title">
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">المحتوى :</label>
-                <textarea class="form-control" rows="5" id="textarea"></textarea>
+                <textarea class="form-control" rows="5"  name="body"></textarea>
             </div>
             <div class="form-group">
                 <label> الصورة :</label>
                 <br>
-                {{ Form::file('image_uploaded')}}
+                {{ Form::file('img')}}
              </div>
                 
             <button class="btn btn-primary float-left">انشاء</button>
@@ -34,10 +35,5 @@
     </div>
 @endsection
 @section('scripts')
-<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-<script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
-<script>
-    $('textarea').ckeditor();
-    // $('.textarea').ckeditor(); // if class is prefered.
-</script>
+
 @endsection

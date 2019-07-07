@@ -33,8 +33,11 @@
                         <td>{{$user->rank}}</td>
                         <td>{{$user->address}}</td>
                         <td>{{$user->phone}}</td>
-                 
+                        @if($user->team)
                         <td>{{$user->team->name}}</td>
+                        @else 
+                        <td>لا يوجد فصل </td>
+                        @endif
                         <td><a href="{{route('student.edit',$user->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit"></i></a>
                         <button  class="btn btn-danger btn-sm mr-1"  data-toggle="modal" data-target="#exampleModal"  @click="getStu({{$user->id}})"><i class="fas fa-user-minus"></i></button></td>
                     </tr>

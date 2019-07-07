@@ -26,14 +26,14 @@
                               <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">الاسم</th>
-                                <th scope="col"> الغياب</th>
+                                <th scope="col">الحضور</th>
                                 <th scope="col">الرتبة</th>
                                 <th scope="col">العنوان</th>
                                 <th scope="col">رقم الهاتف</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <!---
+                              
                               @foreach($team->users as $user)
                               <tr>
                                 <th scope="row">{{$user->id}}</th>
@@ -44,7 +44,8 @@
                                 <td>{{$user->phone}}</td>
                               </tr>
                              @endforeach
-                             --->
+                             
+                             <!--
                              <tr v-for="item in attend">
                                 <th scope="row">@{{item.id}}</th>
                                 <td>@{{item.name}}</td>
@@ -56,7 +57,7 @@
                                 <td>@{{item.address}}</td>
                                 <td>@{{item.phone}}</td>
                             </tr>
-              
+                          -->
                             </tbody>
                           </table>
                     </div>
@@ -69,6 +70,7 @@
 @section('scripts')
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
+/*
     var app = new Vue({
             el:"#app",
             data:{
@@ -98,6 +100,6 @@
                 }
             },
     });
-
+*/
     </script> 
 @endsection

@@ -46,10 +46,12 @@ class SubjectController extends Controller
     {
         $this->validate($request,array(
             'name' =>'required|max:199',
+            'grade'=>'required|integer',
         ));
         $subject= new Subject;
         $subject->name=$request->name;
         $subject->content=$request->content;
+        $subject->grade=$request->grade;
         $subject->save();
 
         return redirect()->route('subject.index');
@@ -91,10 +93,12 @@ class SubjectController extends Controller
        
         $this->validate($request,array(
             'name' =>'required|max:199',
+            'grade'=>'required|integer',
         ));
         $subject = Subject::find($id);
         $subject->name=$request->name;
         $subject->content=$request->content;
+        $subject->grade=$request->grade;
         $subject->save();
 
         return redirect()->route('subject.index');
@@ -109,8 +113,10 @@ class SubjectController extends Controller
     public function destroy($id)
     {
         $subject = Subject::find($id);
+        $subject->teams()->detach();
+        $subject->users()->detach();
         $subject->delete();
 
-        return redirect()->route('subject.index');
+        return $id;
     }
 }

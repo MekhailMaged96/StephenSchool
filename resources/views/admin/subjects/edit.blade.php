@@ -12,6 +12,8 @@
                 <input type="text" class="form-control" id="formGroupExampleInput" placeholder="الاسم" name="name" value="{{$subject->name}}">
                 <label for="formGroupExampleInput" class="mt-2">المحتوى</label>
                 <input type="text" class="form-control" id="formGroupExampleInput" placeholder="المحتوى" name="content" value="{{$subject->content}}">
+                <label for="formGroupExampleInput">الدرجة</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="الدرجة" name="grade" value="{{$subject->grade}}">
             </div>
             {{Form::hidden('_method','PUT')}}
             <button class="btn btn-success">تعديل</button>

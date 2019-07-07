@@ -6,17 +6,18 @@
 @section('main-admin')
 <section class="news-show">
     <div class="row">
-        <a  href="{{route('news.church.edit',1)}}" class="mr-auto ml-5"><i class="fas fa-edit" style="font-size:25px" ></i></a>
-        <h2 class="ml-auto mr-3">عنوان الخبر</h2>
+        <a  href="{{route('news.school.edit',$schoolnews->id)}}" class="mr-auto ml-5"><i class="fas fa-edit" style="font-size:25px" ></i></a>
+        <h5 class="mr-3">{{$schoolnews->title}}</h5>
     </div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-        <article class="ml-auto mt-5 mr-3 text-right">
-        <span>
-       لملاك والرومانى   الملاك والرومانى   الملاك والرومانى   الملاك والرومانى
-       لملاك والرومانى   الملاك والرومانى   الملاك والرومانى   الملاك والرومانى 
-       لملاك والرومانى   الملاك والرومانى   الملاك والرومانى   الملاك والرومانى  
-        </span>
+    <div class="row justify-content-end mb-3">
+        <div class="col-md-12 col-sm-12 ">
+        <article class="mt-5 mr-3 text-right">
+            @if($schoolnews->img)
+            <img src="{{asset('storage/news/school/'.$schoolnews->img)}}"> 
+            @endif 
+            <p class="mt-5">
+                {{$schoolnews->body}}
+            </p>
         <article>
         </div>
     </div>

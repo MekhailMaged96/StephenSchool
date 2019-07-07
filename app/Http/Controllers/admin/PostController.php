@@ -15,6 +15,11 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     public function index()
     {
             $posts =Post::all();
@@ -56,7 +61,7 @@ class PostController extends Controller
             $post->img= $filename;
         }
         $post->save();
-        session()->flash('success', 'Post Successfully Created!');
+        session()->flash('success', '! تم انشاء كل جديد بنجاح ');
         return redirect()->route('posts.index');
     }
 
@@ -108,17 +113,21 @@ class PostController extends Controller
             $image = $request->file('img');
             $filename= time().'.'.$image->getClientOriginalExtension();
             $location = public_path('images/'.$filename);
-            Image::make($image)->resize(800,400)->save( $location);
+            Image::make($image)->resize(400,400)->save( $location);
             
             $oldfile = $post->img;
             //update the database 
             $post->img= $filename;
           
             //delete the image
-            Storage::delete($oldfile);
+           // Storage::delete($oldfile);
+           if($oldfile){
+            unlink(public_path('images/'.$oldfile));
+           }
+          
         }
         $post->save();
-        session()->flash('success', 'Post Successfully Updated!');
+        session()->flash('success', '! تم تعديل كل جديد بنجاح ');
         return redirect()->route('posts.show',$post->id);
     }
 
@@ -133,11 +142,14 @@ class PostController extends Controller
         
         
         $post = Post::find($id);
-        Storage::delete($post->img);
+        if($post->img){
+            unlink(public_path('images/'.$post->img));
+        }
+   
         
         $post->delete();
        
-        return $post;
+        return $id;
        
         
     }

@@ -6,7 +6,7 @@
     .login {
 
         padding: 20px;
-        margin: 20px;
+        margin: 10px;
     }
   </style>  
 @endsection

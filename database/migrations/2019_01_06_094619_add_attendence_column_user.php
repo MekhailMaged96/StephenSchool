@@ -14,7 +14,7 @@ class AddAttendenceColumnUser extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('attendance');
+            $table->integer('attendance')->nullable();
         });
     }
 

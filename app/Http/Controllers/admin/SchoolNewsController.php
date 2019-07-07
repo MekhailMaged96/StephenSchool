@@ -4,6 +4,11 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\SchoolNews;
+use Illuminate\Support\Facades\Storage;
+use Session;
+use Purifier;
+use Image;
 
 class SchoolNewsController extends Controller
 {
@@ -14,7 +19,8 @@ class SchoolNewsController extends Controller
      */
     public function index()
     {
-        return view('admin.schoolnews.index');
+        $schoolnews = SchoolNews::all();
+        return view('admin.schoolnews.index')->with('schoolnews',$schoolnews);
     }
 
     /**
@@ -35,7 +41,28 @@ class SchoolNewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,array(
+            'title' =>'required|max:199',
+            'body'  =>'required',
+            'img'=>'image',
+        ));
+        $new= new SchoolNews;
+
+        $new->title = $request->title;
+        $new->body = $request->body;
+        if($request->hasfile('img'))
+        {
+            $image = $request->file('img');
+            $filename= time().'.'.$image->getClientOriginalExtension();
+            $location = public_path('storage/news/school/'.$filename);
+            Image::make($image)->resize(800,400)->save( $location);
+            $new->img=$filename;
+        } 
+
+  
+      $new->save();
+
+      return redirect()->route('news.school.index');
     }
 
     /**
@@ -46,7 +73,8 @@ class SchoolNewsController extends Controller
      */
     public function show($id)
     {
-        return view('admin.schoolnews.show');
+        $schoolnews = SchoolNews::find($id);
+        return view('admin.schoolnews.show')->with('schoolnews',$schoolnews);
     }
 
     /**
@@ -57,7 +85,8 @@ class SchoolNewsController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.schoolnews.edit');
+        $schoolnews = SchoolNews::find($id);
+        return view('admin.schoolnews.edit')->with('schoolnews',$schoolnews);
     }
 
     /**
@@ -69,7 +98,37 @@ class SchoolNewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,array(
+            'title' =>'required|max:199',
+            'body'  =>'required',
+            'img'=>'image',
+        ));
+        $new = SchoolNews::find($id);
+        $new->title=$request->title;
+        $new->body =$request->body;
+        
+        if($request->hasfile('img'))
+        {
+            $image = $request->file('img');
+            $filename= time().'.'.$image->getClientOriginalExtension();
+            $location = public_path('storage/news/school/'.$filename);
+            Image::make($image)->resize(800,400)->save( $location);
+            
+            $oldfile = $new->img;
+            //update the database 
+            $new->img= $filename;
+
+       
+            if($oldfile){
+                unlink(public_path('storage/news/school/'.$oldfile));
+            }
+            //delete the image
+        
+            //Storage::delete(public_path('storage/news/school/'.$oldfile));
+        }
+        $new->save();
+        session()->flash('success', 'New Successfully Updated!');
+        return redirect()->route('news.school.show',$new->id);
     }
 
     /**
@@ -80,6 +139,14 @@ class SchoolNewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $new = SchoolNews::find($id);
+        if($new->img){
+            unlink(public_path('storage/news/school/'.$new->img));
+        }
+       
+        $new->delete();
+       
+        return "deleted";
     }
 }

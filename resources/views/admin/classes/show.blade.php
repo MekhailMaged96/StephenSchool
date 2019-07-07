@@ -10,14 +10,16 @@
                 <input type="radio" class="form-check-input ml-2" v-model="classoption" name="optradio" value="show-students">كشف الطلاب
             </label>
         </div>
+        <!--
         <div class="form-check-inline" dir="rtl">
             <label class="form-check-label">
                 <input type="radio" class="form-check-input ml-2" v-model="classoption" name="optradio" value="grades">الدرجات
             </label>
         </div>
+        -->
         <div class="form-check-inline" dir="rtl">
             <label class="form-check-label">
-                <input type="radio" class="form-check-input ml-2" v-model="classoption"  name="optradio" value="attendance">الغياب
+                <input type="radio" class="form-check-input ml-2" v-model="classoption"  name="optradio" value="attendance">الحضور
             </label>
         </div> 
         <div class="form-check-inline" dir="rtl">
@@ -40,7 +42,9 @@
                                 <th scope="col">الرتبة</th>
                                 <th scope="col">العنوان</th>
                                 <th scope="col">رقم الهاتف</th>
-                                <th scope="col"></th>
+                                @issuper
+                                <th scope="col">الاعدادت</th>
+                                @endissuper
                             </tr>
                     </thead>
                     <tbody class="text-right">
@@ -51,8 +55,12 @@
                                 <td>{{$user->rank}}</td>
                                 <td>{{$user->address}}</td>
                                 <td>{{$user->phone}}</td>
-                                <td><a href="{{route('student.edit',$user->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit"></i></a>
-                                    <button  class="btn btn-danger btn-sm mr-1"  data-toggle="modal" data-target="#exampleModal2"  @click="getStu({{$user->id}})"><i class="fas fa-user-minus"></i></button></td>
+                                @issuper
+                                <td>
+                                    <a href="{{route('student.edit',$user->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit"></i></a>
+                                    <button  class="btn btn-danger btn-sm mr-1"  data-toggle="modal" data-target="#exampleModal2"  @click="getStu({{$user->id}})"><i class="fas fa-user-minus"></i></button>
+                                </td>
+                                @endissuper
                             </tr>
                         @endforeach
                     </tbody>
@@ -75,7 +83,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">الاسم</th>
                                 <th scope="col">الرتبة</th>
-                                <th scope="col">الغياب</th>
+                                <th scope="col">الحضور</th>
                             </tr>
                     </thead>
                     <tbody class="text-right">
@@ -103,8 +111,10 @@
         <div class="row justify-content-end text-right">
 
            
-            <a href="{{route('grade.create',$team->id)}}" class="btn btn-success btn-sm mb-3 mr-3" ><i class="fas fa-plus mr-2"></i>اضافة الدرجات  </a>
+            <!--<a href="<?php /**{{ route('grade.create',$team->id)}} **/?>" class="btn btn-success btn-sm mb-3 mr-3" ><i class="fas fa-plus mr-2"></i>اضافة الدرجات  </a>
+            -->
         </div>
+        <!--
         <div class="row justify-content-end">
            
             <div class="table-responsive-sm text-nowrap mr-3 mt-1 text-right" dir="rtl">
@@ -121,6 +131,7 @@
                             </tr>
                     </thead>
                     <tbody>
+                        
                         @foreach ($team->users as $user)
                         <tr>
                             <td>{{$user->id}}</td>
@@ -131,11 +142,12 @@
                             
                         </tr>
                         @endforeach
+                        
                     </tbody>
                 </table>
             </div>       
         </div>
-       
+        --->
                 
         </div>
     </div>
@@ -156,7 +168,9 @@
                                     <th scope="col">الاسم</th>
                                     <th scope="col">البريد الالكترونى</th>
                                     <th scope="col">رقم الهاتف</th>
+                                    @issuper
                                     <th scope="col">التعديلات</th>
+                                    @endissuper
                                 </tr>
                         </thead>
                         <tbody>
@@ -166,8 +180,11 @@
                                     <td>{{ $teacher->name}}</td>
                                     <td>{{ $teacher->email}}</td>
                                     <td>{{ $teacher->phone}}</td>
+                                    @issuper
                                     <td><a href="{{route('teacher.edit',$teacher->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit"></i></a>
-                                        <button  class="btn btn-danger btn-sm mr-1"  data-toggle="modal" data-target="#exampleModal"  @click="getTea({{$teacher->id}})"><i class="fas fa-user-minus"></i></button></td>
+                                        <button  class="btn btn-danger btn-sm mr-1"  data-toggle="modal" data-target="#exampleModal"  @click="getTea({{$teacher->id}})"><i class="fas fa-user-minus"></i></button>
+                                    </td>
+                                    @endissuper
                                 </tr>
                                 @endforeach
                         </tbody>

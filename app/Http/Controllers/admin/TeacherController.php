@@ -45,10 +45,7 @@ class TeacherController extends Controller
         $this->validate($request,array(
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            
-            'rank' =>'string|max:255',
-            'address'=>'string',
-            'phone'=>'regex:/(01)[0-9]{9}/',
+
 
         ));
         $teacher = new Teacher; 
@@ -114,7 +111,7 @@ class TeacherController extends Controller
         $this->validate($request,array(
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,'.$id,
-            'phone'=>'regex:/(01)[0-9]{9}/',
+           
 
         ));
         $teacher = Teacher::find($id); 

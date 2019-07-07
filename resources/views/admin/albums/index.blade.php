@@ -8,18 +8,12 @@
         <a href="{{route('album.create')}}" class="btn btn-success  ml-auto mr-3"><i class='fas fa-plus'></i> انشاء البوم</a>
     </div>
     <hr>
-    <div class="row">
+    <div class="row justify-content-end">
      
-        @if($albums->count()>0)
-        <?php
-      
-        $albumcount=$albums->count();
-        $i=1;
-        ?>
+        @if(count($albums)>0)
         @foreach($albums as $album)
 
-        @if($i==$albumcount)
-        <div class="col-md-4 col-sm-4 col-4 justify-content-end">
+        <div class="col-md-4 col-sm-4 col-4">
             
             <a href="{{route('album.show',$album->id)}}" >
              <img src="{{asset('storage/album_covers/'.$album->cover_image)}}" alt="{{$album->name}}" class="img-thumbnail">
@@ -27,16 +21,6 @@
        
             <div class="caption text-center mt-2"><button  @click="getdata({{$album->id}})"  data-toggle="modal" data-target="#exampleModal" class="btn btn-danger btn-sm mr-2"><i class='fas fa-trash-alt'></i></button> <a href="{{route('album.edit',$album->id)}}" class="btn btn-primary btn-sm mr-4" style="float: none !important;"><i class='fas fa-edit'></i></a> {{$album->name}}</div>
         </div>
-        @else 
-        <div class="col-md-4 col-sm-4 col-4">
-            
-                <a href="{{route('album.show',$album->id)}}" >
-                 <img src="{{asset('storage/album_covers/'.$album->cover_image)}}" alt="{{$album->name}}" class="img-thumbnail mb-2">
-                </a>
-           
-            <div class="caption text-center mt-2"><button  @click="getdata({{$album->id}})"  data-toggle="modal" data-target="#exampleModal" class="btn btn-danger btn-sm mr-2"><i class='fas fa-trash-alt'></i></button> <a href="{{route('album.edit',$album->id)}}" class="btn btn-primary btn-sm mr-4" style="float: none !important;"><i class='fas fa-edit'></i></a> {{$album->name}}</div>
-        </div>
-        @endif
         @endforeach
         @else 
         <div>لا يوجد البوم </div>

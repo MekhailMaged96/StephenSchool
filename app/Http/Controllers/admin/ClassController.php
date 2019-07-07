@@ -49,13 +49,15 @@ class ClassController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,array(
-            'name' =>'max:199',
+            'name' =>'max:199 |required ',
            
        
         ));
+
+        
         $class = new Team;
         $class->name=$request->name;
-        $class->date=$request->date;
+        $class->date=$request->datecourse;
         $i=explode(',',$request->subjects);
         $class->save();
         if($request->subjects){
@@ -66,6 +68,7 @@ class ClassController extends Controller
     
 
         return redirect()->route('class.index');
+        
     }
 
     /**
@@ -122,13 +125,13 @@ class ClassController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,array(
-            'name' =>'max:199',
+            'name' =>'max:199 |required ',
            
        
         ));
         $class =Team::find($id);
         $class->name=$request->name;
-        $class->date=$request->date;
+        $class->date=$request->datecourse;
         $i=explode(',',$request->subjects);
         $class->save();
 
@@ -147,6 +150,18 @@ class ClassController extends Controller
     
     public function destroy($id)
     {
-        //
+        $team = Team::find($id);
+   
+        foreach($team->users as $user){
+           $user->team_id=NULL;
+           $user->save();
+        }
+ 
+  
+        $team->subjects()->detach();
+        $team->teachers()->detach();
+        $team->delete();
+    
+        return 1;
     }
 }

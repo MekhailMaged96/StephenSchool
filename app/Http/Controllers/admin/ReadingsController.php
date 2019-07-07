@@ -38,7 +38,14 @@ class ReadingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,array(
+            'day' =>'required|numeric',
+            'month'  =>'required',
+            'year'=>'required|numeric',
+        ));
+
+        return $date = $request->year ."-". $request->month . "-" .$request->day;
+        
     }
 
     /**

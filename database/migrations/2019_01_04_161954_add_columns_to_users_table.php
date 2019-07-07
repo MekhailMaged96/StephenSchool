@@ -16,10 +16,9 @@ class AddColumnsToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
            $table->string('rank')->nullable();
            $table->string('address')->nullable();
-           $table->integer('phone');
+           $table->integer('phone')->nullable();
            $table->unsignedInteger('team_id')->nullable();
-           $table->foreign('team_id')->references('id')->on('teams')
-           ->onDelete('cascade'); 
+           $table->foreign('team_id')->references('id')->on('teams');
         });
     }
 

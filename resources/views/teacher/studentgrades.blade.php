@@ -20,7 +20,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">الاسم</th>
                                 @foreach($team->subjects as $subject)
-                                <th scope="col">{{$subject->name}}</th>
+                                <th scope="col">{{$subject->name}} ( {{$subject->grade}} )</th>
                                 @endforeach
                               </tr>
                             </thead>

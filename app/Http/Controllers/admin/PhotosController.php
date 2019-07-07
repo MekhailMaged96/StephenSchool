@@ -38,7 +38,6 @@ class PhotosController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,array(
-            'name' =>'required|max:199',
             'photo' =>'required|image|max:1999',
         ));
 
@@ -50,9 +49,6 @@ class PhotosController extends Controller
 
          }
          $photo = new Photo;
-       
-         $photo->name=$request->name;
-         $photo->description=$request->description;
          $photo->size=$request->file('photo')->getClientSize();
          $photo->photo=$filename;
          $photo->album_id=$request->album_id;
@@ -107,11 +103,11 @@ class PhotosController extends Controller
         
         $photo =Photo::find($id);
     
-        if(Storage::delete('public/photos/'.$photo->album_id.'/'.$photo->photo))
-        {
-            $photo->delete();
-          
-        }
+       
+        unlink('storage/photos/'.$photo->album_id.'/'.$photo->photo);
+        
+        $photo->delete();
+       
         
       
        

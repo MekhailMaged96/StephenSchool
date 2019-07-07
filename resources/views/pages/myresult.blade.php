@@ -11,17 +11,19 @@
     
             <div class="row">
                 <div class="offset-sm-2 col-12 col-sm-8">
-                    <h3 class="text-center">نتائج عام 2018 </h3>
+                    <h3 class="text-center">نتائج عام 2019 </h3>
+                    @if($user->subjects->count()>0)
                     <table class="table table-bordered">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">المادة</th>
-                                <th scope="col">100</th>
+                                <th scope="col">الدرجة</th>
+                                <th scope="col">الدرجة النهائية</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if($user->subjects->count()>0)
+                       
                             @foreach($user->subjects as $subject)
                             <tr>
                                 <th scope="row">{{ $subject->id}}</th>
@@ -31,13 +33,15 @@
                                 @else
                                 <td>لا يوجد درجة </td>
                                 @endif
+                                <td>{{ $subject->grade}}</td>
                             </tr>
                            @endforeach
-                           @else 
-                           <p>لا يوجد درجات </p>
-                           @endif
+                        
                         </tbody>
                     </table> 
+                    @else 
+                    <p>لا يوجد درجات </p>
+                    @endif
                 </div>
             </div>
         </div>

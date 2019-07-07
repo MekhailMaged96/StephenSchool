@@ -16,7 +16,7 @@ class AlbumsController extends Controller
      */
     public function index()
     {
-        $albums = Album::with('photos')->get();
+        $albums = Album::with('photos')->orderBy('id', 'DESC')->get();
         return view('admin.albums.index')->with('albums',$albums);
     }
 
@@ -61,7 +61,7 @@ class AlbumsController extends Controller
         $album = new Album;
 
         $album->name=$request->name;
-        $album->description=$request->description;
+   
         $album->cover_image=$filename;
         $album->save();
 
@@ -109,7 +109,7 @@ class AlbumsController extends Controller
         ));
         $album = Album::find($id);
         $album->name=$request->name;
-        $album->description=$request->description;
+     
 
       
         if($request->hasfile('cover_image'))
@@ -126,10 +126,13 @@ class AlbumsController extends Controller
             
             $oldfile=$album->cover_image;
             $album->cover_image= $filename;
-            Storage::delete('public/album_covers'.$oldfile);
+            if($oldfile){
+              unlink('storage/album_covers/'.$oldfile);
+            }
+        
            
         }
-
+        
         $album->save();
 
         return redirect(route('album.index'))->with('success','Album Edited Successfully');
@@ -146,9 +149,9 @@ class AlbumsController extends Controller
     public function destroy($id)
     {
         $album = Album::find($id);
-     
+        unlink('storage/album_covers/'.$album->cover_image);
         $album->delete();
-        Storage::delete('public/album_covers/'.$album->cover_image);
+     
         return $id;
           
         

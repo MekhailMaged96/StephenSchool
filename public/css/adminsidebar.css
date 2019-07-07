@@ -78,8 +78,11 @@
   padding-right: 40px;
 }
 #sidebar  a:hover {
-
+    text-decoration: none !important;
     color:#f00 !important;
+ }
+ #sidebar {
+   
  }
 @media (max-width:768px) {
     #sidebar {

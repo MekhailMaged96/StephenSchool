@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Team;
+
 use Hash;
 class StudentController extends Controller
 {
@@ -41,15 +42,17 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate($request,array(
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            
-            'rank' =>'string|max:255',
-            'address'=>'string',
-            'phone'=>'regex:/(01)[0-9]{9}/',
+            'rank' =>'max:255',
+            'address'=>'max:255',
+        
 
         ));
+        
+        
         $user = new User; 
         $user->name=$request->name;
         $user->email=$request->email;
@@ -63,11 +66,22 @@ class StudentController extends Controller
         $user->rank=$request->rank;
         $user->address=$request->address;
         $user->phone=$request->phone;
+        
         $user->team_id=$request->class;
-
         $user->save();
+
+    
+        if($request->class){
+            $team = Team::find($request->class);
+            if($team->subjects){
+                $user->subjects()->sync($team->subjects,false);
+            }
+        }
+
+     
+
         session()->flash('success', '! تم انشاء بيانات الطالب بنجاح ');
-        return redirect()->route('student.index');
+         return redirect()->route('student.index');
     }
 
     /**
@@ -108,14 +122,13 @@ class StudentController extends Controller
         $this->validate($request,array(
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,'.$id,
-           
-            'rank' =>'string|max:255',
-            'address'=>'string',
-            'phone'=>'regex:/(01)[0-9]{9}/',
+            'rank' =>'max:255',
+            'address'=>'max:255',
+         
 
         ));
         $user = User::find($id); 
-       
+        $Team_id= $user->team_id;
       
         
 
@@ -137,6 +150,26 @@ class StudentController extends Controller
         $user->team_id=$request->class;
 
         $user->save();
+        if($request->class){
+            $team = Team::find($request->class);
+            if($team->subjects){
+                $user->subjects()->sync($team->subjects,true);
+            }else {
+                $user->subjects()->sync(array());
+            }
+        }
+        if(is_null($request->class)){
+       
+                if($user->subjects){
+                    $user->subjects()->detach();
+                }else {
+                    $user->subjects()->sync(array());
+                }
+            
+          
+        }
+
+        
         session()->flash('success', '! تم  تعديل بيانات الطالب بنجاح ');
         return redirect()->route('student.index');
     }
@@ -150,8 +183,9 @@ class StudentController extends Controller
     public function destroy($id)
     {
         $user =User::find($id);
-
+        $user->subjects()->detach();
         $user->delete();
+        
         return "deleted";
     }
 }

@@ -29,11 +29,16 @@
                 </div>
                 <div class="form-group col-md-2">
                         <label for="inputState">الفصل</label>
+                        @if(count($teams)>0)
                         <select id="inputState" class="form-control" name="class">
+                                <option value="">عدم اضافة فصل </option>  
                                 @foreach($teams as $team)
                                 <option value="{{$team->id}}" {{ $user->team_id == $team->id ? 'selected="selected"' : '' }} >{{$team->name}}</option>
                                 @endforeach
                         </select>
+                        @else 
+                        <p>لا يوجد فصول</p>
+                        @endif
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput2">رقم الهاتف</label>

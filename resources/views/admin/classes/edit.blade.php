@@ -13,7 +13,12 @@
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">الميعاد</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="الميعاد" name="date" value="{{$team->date}}">
+                <date-time-picker
+                v-model="date"
+                format="yyyy-LL-dd hh:mm a"
+                :hour-time="12"
+              ></date-time-picker>
+              <input type="hidden" name="datecourse" :value="date">
             </div>
     
                     <label for="formGroupExampleInput">المواد :</label>
@@ -39,7 +44,8 @@ var app = new Vue({
     el:"#app",
     data:{
        subjectSelected:{!!$team->subjects->pluck('id')!!},
-    }
+       date:'{{$team->date}}'
+    },
 
 });
 </script>

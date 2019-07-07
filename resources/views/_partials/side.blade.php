@@ -1,4 +1,4 @@
-<div class="col-md-3">
+<div class="col-md-3 mb-3" id="about-how">
         <nav>
             <div class="about-us">
                 <div class="card-header text-right">

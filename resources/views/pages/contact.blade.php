@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title','| الرئيسية')
+@section('title','| تواصل معانا ')
 
 @section('content')
  @include('_partials.withlogo')
@@ -8,7 +8,7 @@
             <div class="row">
                 <div class=" offset-1 col-md-10 col-10 col-sm-10 offset-1">
                     <section class="contact">
-                        <form action="" method="POST">
+                        <form action="{{route('contact')}}" method="POST">
                                 @csrf
                                     <div class="form-group">
                                         <label name="email">{{trans('app.email')}}</label>
